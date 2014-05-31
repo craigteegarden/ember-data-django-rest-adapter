@@ -3,6 +3,7 @@ module('embedded integration tests', {
         ajaxUrl = undefined;
         ajaxType = undefined;
         ajaxHash = undefined;
+
         App.reset();
     },
     teardown: function() {
@@ -12,9 +13,16 @@ module('embedded integration tests', {
 
 test('ajax response with array of embedded records renders hasMany correctly', function() {
     var json = [{"id": 1, "hat": "zzz", "speakers": [{"id": 1, "name": "first", "other": 1}], "ratings": [{"id": 1, "score": 10, "feedback": "nice", "other": 1}], "tags": [{"id": 1, "description": "done"}], "location": {"id": 1, "name": "US"}}];
-
+debugger;
+  
+        stubEndpointForHttpRequest('/api/sessions/1/', {"id": 1});
+        stubEndpointForHttpRequest('/api/associations/1/', {"id": 1});
+      
     stubEndpointForHttpRequest('/api/others/', json);
+    stubEndpointForHttpRequest('/api/users/1/*', {"id": 1});
+
     visit("/others").then(function() {
+      debugger;
         var rows = find("table tr").length;
         equal(rows, 4, "table had " + rows + " rows");
         var hat = Ember.$.trim($("table tr:eq(0) td:eq(0)").text());
@@ -25,6 +33,8 @@ test('ajax response with array of embedded records renders hasMany correctly', f
         equal(tag, "done", "tag was instead: " + tag);
     });
 });
+
+/*
 
 test('ajax response with no embedded records yields empty table', function() {
     stubEndpointForHttpRequest('/api/others/', []);
@@ -76,3 +86,4 @@ test('add rating will do http post and append rating to template', function() {
         expectRatingAddedToStore(3, 4, 'def', 1, 'other');
     });
 });
+*/

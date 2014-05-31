@@ -67,5 +67,6 @@ function stubEndpointForHttpRequest(url, json, verb, status) {
     });
 }
 
-$.mockjaxSettings.logging = false;
+$.mockjaxSettings.logging = true;
+$.mockjaxSettings.throwUnmocked = true;
 $.mockjaxSettings.responseTime = 0;

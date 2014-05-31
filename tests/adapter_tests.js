@@ -8,6 +8,10 @@ module('integration tests', {
         speakers_json = [{"id": 9, "name": "first", "session": 1}, {"id": 4, "name": "last", "session": 1}];
         ratings_json = [{"id": 8, "score": 10, "feedback": "nice", "session": 1}];
         tags_json = [{"id": 7, "description": "done"}];
+//         stubEndpointForHttpRequest('/api/associations/1/', {"id": 1});
+//         stubEndpointForHttpRequest('/api/sessions/1/', {"id": 1});
+//         stubEndpointForHttpRequest('/api/users/1/', {"id": 1});
+//         stubEndpointForHttpRequest('/api/companies/1/', {"id": 1});
         App.reset();
     },
     teardown: function() {
